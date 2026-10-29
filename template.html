@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>__PAGE_TITLE__</title>
+<meta name="description" content="__DESCRIPTION__">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="__FONT_URL__" rel="stylesheet">
+<style>
+:root{
+  __LIGHT_VARS__
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){__DARK_VARS__}
+}
+:root[data-theme="dark"]{__DARK_VARS__}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 5rem)}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"__FONT__",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-variation-settings:"wdth" 100;font-size:1.0625rem;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-underline-offset:.2em;text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+.wrap{max-width:66rem;margin:0 auto;padding:0 1.5rem}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:4rem;gap:1rem}
+.brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;font-weight:650}
+.mono{width:2.1rem;height:2.1rem;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-size:.8rem;font-weight:700;font-variation-settings:"wdth" 80;letter-spacing:.02em}
+nav.main{display:flex;align-items:center;gap:.25rem}
+nav.main a{text-decoration:none;color:var(--muted);padding:.4rem .75rem;border-radius:999px;font-size:.95rem}
+nav.main a:hover{color:var(--ink)}
+nav.main a[aria-current="page"]{color:var(--ink);background:var(--surface)}
+.menu-btn{display:none;width:2.4rem;height:2.4rem;border-radius:50%;border:1px solid var(--rule)}
+.menu-btn svg{width:1.1rem;height:1.1rem;margin:auto;display:block}
+@media (max-width:720px){
+  .menu-btn{display:block}
+  nav.main{display:none;position:absolute;left:0;right:0;top:4rem;flex-direction:column;align-items:stretch;padding:.75rem 1.5rem 1.25rem;background:var(--bg);border-bottom:1px solid var(--rule)}
+  nav.main.open{display:flex}
+  nav.main a{padding:.7rem .9rem}
+}
+
+.btn{display:inline-flex;align-items:center;gap:.5rem;cursor:pointer;text-decoration:none;padding:.65rem 1.15rem;border-radius:999px;border:1.5px solid var(--ink);font-weight:600;font-size:.95rem;line-height:1.2;transition:background .15s,color .15s}
+.btn:hover{background:var(--ink);color:var(--bg);text-decoration:none}
+.btn.solid{background:var(--ink);color:var(--bg)}
+.btn.solid:hover{background:transparent;color:var(--ink)}
+.btn svg{width:1em;height:1em;flex:none}
+.actions{display:flex;flex-wrap:wrap;gap:.6rem}
+
+/* home */
+.hero{padding:clamp(3rem,8vw,5.5rem) 0 1rem}
+.hero h1{margin:0 0 1.25rem;font-weight:740;line-height:.95;letter-spacing:-.02em;font-size:clamp(2.8rem,8vw,5.6rem);font-variation-settings:"wdth" 68;max-width:14ch}
+.hero .lede{font-size:clamp(1.1rem,2vw,1.3rem);line-height:1.5;color:var(--muted);max-width:52ch;margin:0 0 1.75rem}
+.open{display:inline-flex;align-items:center;gap:.55rem;font-size:.9rem;color:var(--muted);margin-bottom:1.5rem}
+.open::before{content:"";width:.55rem;height:.55rem;border-radius:50%;background:var(--ink)}
+.signal{display:block;width:100%;height:clamp(140px,16vw,180px);margin:2.5rem 0 .5rem}
+.signal-note{color:var(--faint);font-size:.8rem;font-style:italic;margin:0}
+
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:3rem 0 0}
+.stats div{padding:1.5rem 1rem 1.5rem 0}
+.stats div+div{padding-left:1.25rem;border-left:1px solid var(--rule)}
+.stats b{display:block;font-size:clamp(2rem,5vw,3rem);line-height:1;font-weight:720;font-variation-settings:"wdth" 70}
+.stats span{color:var(--muted);font-size:.9rem}
+@media (max-width:600px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stats div:nth-child(3){padding-left:0;border-left:0}.stats div:nth-child(n+3){border-top:1px solid var(--rule)}}
+
+.block{padding:clamp(3rem,7vw,4.5rem) 0 0}
+.block-head{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:1.5rem}
+.block-head h2{margin:0;font-size:clamp(1.6rem,3.2vw,2.1rem);line-height:1.1;font-weight:720;font-variation-settings:"wdth" 72}
+.block-head p{margin:.35rem 0 0;color:var(--muted)}
+.block-head a{white-space:nowrap;font-size:.95rem}
+
+/* updates */
+.updates{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.updates li{border-bottom:1px solid var(--rule)}
+.updates .row{display:grid;grid-template-columns:7.5rem minmax(0,1fr) auto;gap:1rem;align-items:baseline;padding:1rem 0;text-decoration:none}
+.updates a.row:hover .u-title{text-decoration:underline;text-underline-offset:.2em}
+.u-date{color:var(--muted);font-size:.9rem;font-variant-numeric:tabular-nums}
+.u-title{font-weight:600}
+.u-tags{color:var(--faint);font-size:.85rem;text-align:right}
+@media (max-width:640px){.updates .row{grid-template-columns:1fr;gap:.1rem}.u-tags{text-align:left}}
+
+/* project cards */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+.card{display:flex;flex-direction:column;text-align:left;border:1px solid var(--rule);border-radius:14px;padding:1.4rem;background:var(--bg);transition:border-color .15s;text-decoration:none;min-width:0}
+.card:hover{border-color:var(--ink)}
+.card.wide{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:1.75rem;align-items:center}
+@media (max-width:760px){.card.wide{grid-template-columns:1fr}}
+.thumb{background:var(--surface);border-radius:10px;aspect-ratio:16/9;display:grid;place-items:center;margin-bottom:1.1rem;color:var(--ink)}
+.card.wide .thumb{margin:0;aspect-ratio:4/3}
+.thumb svg{width:62%;height:auto;max-height:80%}
+.kind{display:inline-flex;align-self:flex-start;font-size:.78rem;font-weight:600;padding:.12rem .6rem;border-radius:999px;border:1px solid var(--ink);margin-bottom:.7rem}
+.card h3{margin:0 0 .45rem;font-size:1.25rem;line-height:1.25;font-weight:680}
+.card.wide h3{font-size:1.6rem;font-variation-settings:"wdth" 82}
+.card p{margin:0;color:var(--muted);font-size:.98rem}
+.card .meta{margin-top:auto;padding-top:1rem;color:var(--faint);font-size:.85rem}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem;list-style:none;margin:1rem 0 0;padding:0}
+.tags li{font-size:.8rem;color:var(--muted);background:var(--surface);border-radius:6px;padding:.12rem .5rem}
+
+.filters{display:flex;flex-wrap:wrap;gap:.4rem;margin:0 0 1.5rem}
+.filters button{font-size:.9rem;padding:.35rem .9rem;border-radius:999px;border:1px solid var(--rule);color:var(--muted)}
+.filters button:hover{color:var(--ink);border-color:var(--ink)}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+.minor{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.minor li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--rule)}
+.minor h4{margin:0;font-size:1.05rem;font-weight:620}
+.minor p{margin:.15rem 0 0;color:var(--muted);font-size:.95rem}
+.minor .side{color:var(--faint);font-size:.9rem;white-space:nowrap}
+
+/* page titles */
+.page-head{padding:clamp(2.5rem,6vw,4rem) 0 2rem}
+.page-head h1{margin:0 0 .5rem;font-size:clamp(2.2rem,6vw,3.6rem);line-height:1;font-weight:740;font-variation-settings:"wdth" 70;letter-spacing:-.015em}
+.page-head p{margin:0;color:var(--muted);max-width:56ch}
+
+/* detail */
+.back{display:inline-flex;align-items:center;gap:.4rem;color:var(--muted);text-decoration:none;font-size:.95rem;margin:2rem 0 0}
+.back:hover{color:var(--ink)}
+.detail{display:grid;grid-template-columns:13rem minmax(0,1fr);gap:3rem;padding:2rem 0 4rem}
+.toc{position:sticky;top:6rem;align-self:start;font-size:.9rem}
+.toc p{margin:0 0 .6rem;color:var(--faint)}
+.toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--rule)}
+.toc button{display:block;width:100%;text-align:left;padding:.3rem 0 .3rem .9rem;color:var(--muted);margin-left:-1px;border-left:1px solid transparent}
+.toc button:hover{color:var(--ink)}
+.toc button.on{color:var(--ink);border-left-color:var(--ink)}
+@media (max-width:860px){.detail{grid-template-columns:1fr;gap:1.5rem}.toc{position:static}}
+.d-thumb{background:var(--surface);border-radius:14px;height:clamp(160px,24vw,240px);display:grid;place-items:center;margin-bottom:2rem}
+.d-thumb svg{height:70%;width:auto;max-width:80%}
+.detail h1{margin:.2rem 0 1rem;font-size:clamp(2rem,4.6vw,3rem);line-height:1.05;font-weight:740;font-variation-settings:"wdth" 74;letter-spacing:-.01em}
+.abstract{font-size:1.15rem;line-height:1.55;margin:0 0 1.5rem;max-width:62ch}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:1rem 1.5rem;padding:1.25rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin:1.5rem 0 2.5rem}
+.facts dt{color:var(--faint);font-size:.82rem}
+.facts dd{margin:0;font-weight:560}
+.body h2{font-size:1.45rem;line-height:1.2;margin:2.5rem 0 .75rem;font-weight:700;font-variation-settings:"wdth" 80}
+.body h2:first-child{margin-top:0}
+.body p,.body li{max-width:64ch}
+.body p{margin:0 0 1em}
+.body ul{padding-left:1.1rem;margin:0 0 1em}
+.body li{margin:.25rem 0}
+.body .note{border-left:2px solid var(--ink);padding:.2rem 0 .2rem 1rem;color:var(--muted);margin:1.5rem 0}
+.next-prev{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--rule)}
+.next-prev a{border:1px solid var(--rule);border-radius:12px;padding:1rem 1.2rem;text-decoration:none}
+.next-prev a:hover{border-color:var(--ink)}
+.next-prev small{display:block;color:var(--faint)}
+.next-prev .r{text-align:right}
+
+/* experience */
+.timeline{list-style:none;margin:0;padding:0;border-left:1.5px solid var(--ink)}
+.timeline li{position:relative;padding:0 0 2.5rem 1.75rem}
+.timeline li:last-child{padding-bottom:0}
+.timeline li::before{content:"";position:absolute;left:-7px;top:.45rem;width:12px;height:12px;border-radius:50%;background:var(--bg);border:1.5px solid var(--ink)}
+.timeline li.next::before{background:var(--ink)}
+.when{color:var(--muted);font-size:.9rem;font-variant-numeric:tabular-nums}
+.timeline h3{margin:.15rem 0 .1rem;font-size:1.25rem;font-weight:660;line-height:1.3}
+.org{margin:0 0 .5rem;color:var(--muted)}
+.timeline p{margin:0;max-width:62ch}
+.timeline .more{display:inline-block;margin-top:.6rem;font-size:.95rem}
+
+/* about */
+.two{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:3rem;padding-bottom:1rem}
+@media (max-width:820px){.two{grid-template-columns:1fr;gap:2rem}}
+.prose p{margin:0 0 1em;max-width:62ch}
+.side-box{border:1px solid var(--rule);border-radius:14px;padding:1.4rem;align-self:start}
+.side-box h3{margin:0 0 .75rem;font-size:1rem}
+.side-box p{margin:0 0 1rem;color:var(--muted);font-size:.95rem}
+.side-box .email{font-weight:600;word-break:break-all;display:block;margin-bottom:1rem}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:2rem 2.5rem}
+.skills h3{margin:0 0 .6rem;font-size:1rem;font-weight:700;padding-bottom:.4rem;border-bottom:1.5px solid var(--ink)}
+.skills ul{list-style:none;margin:0;padding:0}
+.skills li{padding:.15rem 0}
+.edu{display:grid;gap:2rem}
+.edu h3{margin:.15rem 0 .1rem;font-size:1.2rem;font-weight:650}
+.edu p{margin:.3rem 0 0;color:var(--muted);max-width:64ch}
+.edu p.g{color:var(--ink)}
+
+footer{border-top:1px solid var(--rule);margin-top:4rem;padding:2.5rem 0 3rem;color:var(--muted);font-size:.9rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.5rem}
+footer .links{display:flex;flex-wrap:wrap;gap:1.25rem}
+footer a{color:var(--ink)}
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 1.25rem);transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:.6rem 1rem;border-radius:999px;font-size:.9rem;opacity:0;pointer-events:none;transition:opacity .2s;z-index:20;max-width:90vw;text-align:center}
+.toast.show{opacity:1}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#/"><span class="mono" aria-hidden="true">__INITIALS__</span>__NAME__</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 4.5h12M2 8h12M2 11.5h12"/></svg></button>
+    <nav class="main" id="mainNav" aria-label="Main">
+      <a href="#/" data-nav="home">Home</a>
+      <a href="#/projects" data-nav="projects">Projects</a>
+      <a href="#/experience" data-nav="experience">Experience</a>
+      <a href="#/about" data-nav="about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main id="app" tabindex="-1"></main>
+
+<footer>
+  <div class="wrap">
+    <div>__FOOTER__</div>
+    <div class="links">
+__FOOTER_LINKS__
+    </div>
+  </div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+/* ---------- data (generated from content.yaml by build.py) ---------- */
+const SITE=__SITE_JSON__;
+const EMAIL=SITE.site.email;
+const CV=SITE.site.cv_url;
+const ICON={
+  gait:'<svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="40" cy="12" r="6"/><path d="M40 18v24l-10 18-4 14M40 42l12 14 2 18M40 26l-12 10M40 26l12 8"/><rect x="45" y="46" width="8" height="10" rx="2"/><path d="M70 40h8l4-10 6 20 4-10h20" stroke-width="1.8"/></svg>',
+  ur:'<svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 72h40"/><rect x="24" y="62" width="20" height="10" rx="2"/><path d="M34 62V44l22-18 20 10v10"/><circle cx="34" cy="44" r="4"/><circle cx="56" cy="26" r="4"/><circle cx="76" cy="36" r="4"/><path d="M72 46h8M76 46v6"/><path d="M76 58v12M68 70h16" stroke-width="1.4" stroke-dasharray="2 3"/><path d="M92 20l18-8M92 28h20" stroke-width="1.6"/></svg>',
+  vision:'<svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="8" y="10" width="104" height="60" rx="4" opacity=".5"/><rect x="20" y="30" width="24" height="22"/><rect x="72" y="24" width="28" height="28" stroke-dasharray="4 3"/><path d="M44 41c10-6 18-6 28-2" stroke-dasharray="2 4"/><circle cx="32" cy="41" r="2.5" fill="currentColor"/><circle cx="86" cy="38" r="2.5" fill="currentColor"/></svg>',
+  bci:'<svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="28" cy="36" r="20"/><circle cx="18" cy="24" r="2" fill="currentColor"/><circle cx="38" cy="24" r="2" fill="currentColor"/><circle cx="12" cy="38" r="2" fill="currentColor"/><circle cx="44" cy="38" r="2" fill="currentColor"/><path d="M52 36h10l3-8 5 16 4-12 3 4h9"/><path d="M92 26h10l10 22" stroke-width="5"/><circle cx="102" cy="26" r="3.5" fill="currentColor" stroke="none"/></svg>',
+  arm:'<svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 72h40"/><path d="M40 72V52l18-22h22"/><circle cx="40" cy="52" r="4"/><circle cx="58" cy="30" r="4"/><path d="M80 24v12M80 24l8-4M80 36l8 4"/><path d="M96 18l6-6M100 26h8M96 34l6 6" stroke-width="1.6"/></svg>',
+  boat:'<svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 50h78l-10 12H26z"/><path d="M40 50V36h22l10 14"/><path d="M10 70c8-4 14 4 22 0s14 4 22 0 14 4 22 0 14 4 22 0" stroke-width="1.6"/><path d="M96 40l6-8-4 0 6-8" stroke-width="1.8"/></svg>',
+  rover:'<svg viewBox="0 0 120 80" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="26" y="30" width="56" height="22" rx="4"/><circle cx="36" cy="58" r="7"/><circle cx="72" cy="58" r="7"/><path d="M54 30V18h10"/><path d="M68 14c6 0 10 4 10 10M72 8c10 0 16 6 16 16" stroke-width="1.6"/><path d="M6 72h108" stroke-dasharray="6 5" stroke-width="1.6"/></svg>'
+};
+const PROJECTS=SITE.projects;
+const MINOR=SITE.more_work||[];
+const UPDATES=SITE.updates||[];
+const EXPERIENCE=SITE.experience||[];
+
+/* ---------- helpers ---------- */
+const app=document.getElementById('app');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const rich=s=>esc(s).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+const statVal=v=>v==='auto:projects'?PROJECTS.length:v==='auto:experience'?EXPERIENCE.length:esc(v);
+const tagList=t=>'<ul class="tags">'+t.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>';
+const DL='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8m-3.5-3.5L8 10l3.5-3.5M3 13h10"/></svg>';
+function card(p,wide){
+  return `<a class="card${wide?' wide':''}" href="#/projects/${p.slug}">
+    <div class="thumb" aria-hidden="true">${ICON[p.icon]}</div>
+    <div style="display:flex;flex-direction:column;min-width:0;height:100%">
+      <span class="kind">${esc(p.kind)}</span>
+      <h3>${esc(p.title)}</h3>
+      <p>${esc(p.summary)}</p>
+      ${tagList((p.tags||[]).slice(0,4))}
+    </div></a>`;
+}
+function minorList(){
+  return '<ul class="minor">'+MINOR.map(m=>`<li><div><h4>${esc(m.title)}</h4><p>${esc(m.text||'')}</p></div><div class="side">${m.link?`<a href="${esc(m.link)}">${esc(m.side||'Link')}</a>`:esc(m.side||'')}</div></li>`).join('')+'</ul>';
+}
+
+/* ---------- views ---------- */
+function viewHome(){
+  const H=SITE.home;
+  const featured=PROJECTS.filter(p=>p.featured);
+  app.innerHTML=`
+  <div class="wrap">
+    <section class="hero">
+      ${H.status?`<div class="open">${esc(H.status)}</div>`:''}
+      <h1>${esc(H.headline)}</h1>
+      <p class="lede">${rich(H.intro)}</p>
+      <div class="actions">
+        ${CV?`<a class="btn solid" href="${CV}" download>${DL}Download CV</a>`:''}
+        <a class="btn" href="mailto:${EMAIL}">Email me</a>
+        <a class="btn" href="#/projects">See projects</a>
+      </div>
+      ${H.show_signal_animation?`<canvas class="signal" id="signal" aria-hidden="true"></canvas>
+      <p class="signal-note">A simulated pick-and-place cycle: joint position, gripper I/O and force sensor. Hover to read the phase.</p>`:''}
+    </section>
+    <div class="stats">
+      ${(H.stats||[]).map(s=>`<div><b>${statVal(String(s.value))}</b><span>${esc(s.label)}</span></div>`).join('')}
+    </div>
+
+    <section class="block">
+      <div class="block-head"><div><h2>Selected work</h2><p>Robotics, automation and sensor integration, in industry, research and competitions.</p></div><a href="#/projects">All projects</a></div>
+      <div class="grid">
+        ${featured.length?card(featured[0],true):''}
+        ${featured.slice(1).map(p=>card(p)).join('')}
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="block-head"><div><h2>Latest updates</h2><p>Roles, results and milestones.</p></div><a href="#/experience">Experience</a></div>
+      <ul class="updates">
+        ${UPDATES.map(u=>{
+          const inner=`<span class="u-date">${esc(u.date)}</span><span class="u-title">${esc(u.title)}</span><span class="u-tags">${esc(u.tags||'')}</span>`;
+          return '<li>'+(u.project?`<a class="row" href="#/projects/${u.project}">${inner}</a>`:`<div class="row">${inner}</div>`)+'</li>';
+        }).join('')}
+      </ul>
+    </section>
+  </div>`;
+  if(H.show_signal_animation)startSignal();
+}
+let filter='All';
+function viewProjects(){
+  const kinds=['All',...new Set(PROJECTS.map(p=>p.kind))];
+  const list=PROJECTS.filter(p=>filter==='All'||p.kind===filter);
+  app.innerHTML=`
+  <div class="wrap">
+    <div class="page-head"><h1>Projects</h1><p>Open any project for the problem, what I built and how it turned out.</p></div>
+    <div class="filters" role="group" aria-label="Filter projects">
+      ${kinds.map(k=>`<button type="button" data-filter="${esc(k)}" aria-pressed="${k===filter}">${esc(k)}</button>`).join('')}
+    </div>
+    <div class="grid">${list.map(p=>card(p)).join('')}</div>
+    <section class="block"><div class="block-head"><div><h2>More work</h2></div></div>${minorList()}</section>
+  </div>`;
+  app.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.filter;viewProjects()}));
+}
+function viewProject(slug){
+  const i=PROJECTS.findIndex(p=>p.slug===slug);
+  if(i<0){viewMissing();return}
+  const p=PROJECTS[i],prev=PROJECTS[(i-1+PROJECTS.length)%PROJECTS.length],next=PROJECTS[(i+1)%PROJECTS.length];
+  const secs=[['Overview'],...p.sections.map(s=>[s.title])];
+  app.innerHTML=`
+  <div class="wrap">
+    <a class="back" href="#/projects">← All projects</a>
+    <div class="detail">
+      <aside class="toc" aria-label="On this page"><p>On this page</p><ol>
+        ${secs.map((s,k)=>`<li><button type="button" data-sec="s${k}">${esc(s[0])}</button></li>`).join('')}
+      </ol></aside>
+      <article>
+        <div class="d-thumb" aria-hidden="true">${ICON[p.icon]}</div>
+        <span class="kind">${esc(p.kind)}</span>
+        <h1 id="s0">${esc(p.title)}</h1>
+        <p class="abstract">${rich(p.abstract)}</p>
+        <div class="actions">
+          ${p.code?`<a class="btn solid" href="${esc(p.code)}">View code on GitHub</a>`:''}
+          <a class="btn" href="mailto:${EMAIL}?subject=${encodeURIComponent('About: '+p.title)}">Ask me about it</a>
+        </div>
+        <dl class="facts">${Object.entries(p.facts||{}).map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
+        <div class="body">
+          ${p.sections.map((s,k)=>`<h2 id="s${k+1}">${esc(s.title)}</h2>${(s.paragraphs||[]).map(x=>`<p>${rich(x)}</p>`).join('')}${s.bullets?`<ul>${s.bullets.map(x=>`<li>${rich(x)}</li>`).join('')}</ul>`:''}`).join('')}
+          ${p.note?`<p class="note">${esc(p.note)}</p>`:''}
+          ${p.tags&&p.tags.length?`<h2>Built with</h2>${tagList(p.tags)}`:''}
+        </div>
+        <div class="next-prev">
+          <a href="#/projects/${prev.slug}"><small>Previous</small>${esc(prev.title)}</a>
+          <a class="r" href="#/projects/${next.slug}"><small>Next</small>${esc(next.title)}</a>
+        </div>
+      </article>
+    </div>
+  </div>`;
+  const btns=[...app.querySelectorAll('[data-sec]')];
+  btns.forEach(b=>b.addEventListener('click',()=>{document.getElementById(b.dataset.sec).scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}));
+  const heads=secs.map((_,k)=>document.getElementById('s'+k));
+  const onScroll=()=>{let on=0;heads.forEach((h,k)=>{if(h.getBoundingClientRect().top<140)on=k});btns.forEach((b,k)=>b.classList.toggle('on',k===on))};
+  onScroll();scrollHandler=onScroll;
+}
+function viewExperience(){
+  app.innerHTML=`
+  <div class="wrap">
+    <div class="page-head"><h1>Experience</h1><p>Industry, research and team roles, most recent first.</p></div>
+    <ol class="timeline">
+      ${EXPERIENCE.map(e=>`<li class="${e.highlight?'next':''}"><div class="when">${esc(e.when)}</div><h3>${esc(e.title)}</h3><p class="org">${esc(e.org)}</p><p>${esc(e.text)}</p>${e.project?`<a class="more" href="#/projects/${e.project}">Read the project</a>`:''}</li>`).join('')}
+    </ol>
+    <section class="block">
+      <div class="block-head"><div><h2>Awards</h2></div></div>
+      <ul class="minor">
+        ${(SITE.awards||[]).map(a=>`<li><div><h4>${esc(a.title)}</h4><p>${esc(a.text||'')}</p></div><div class="side">${esc(a.when||'')}</div></li>`).join('')}
+      </ul>
+    </section>
+  </div>`;
+}
+function viewAbout(){
+  const A=SITE.about;
+  app.innerHTML=`
+  <div class="wrap">
+    <div class="page-head"><h1>About</h1></div>
+    <div class="two">
+      <div class="prose">
+        ${(A.paragraphs||[]).map(x=>`<p>${rich(x)}</p>`).join('')}
+      </div>
+      <div class="side-box">
+        <h3>Get in touch</h3>
+        <p>${rich(A.contact_text||'')}</p>
+        <a class="email" href="mailto:${EMAIL}">${EMAIL}</a>
+        <div class="actions">${CV?`<a class="btn solid" href="${CV}" download>${DL}Download CV</a>`:''}${SITE.site.linkedin?`<a class="btn" href="${esc(SITE.site.linkedin)}">LinkedIn</a>`:''}</div>
+      </div>
+    </div>
+    <section class="block">
+      <div class="block-head"><div><h2>Skills</h2></div></div>
+      <div class="skills">
+        ${Object.entries(A.skills||{}).map(([g,items])=>`<div><h3>${esc(g)}</h3><ul>${items.map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div>`).join('')}
+      </div>
+    </section>
+    <section class="block">
+      <div class="block-head"><div><h2>Education</h2></div></div>
+      <div class="edu">
+        ${(A.education||[]).map(e=>`<div><div class="when">${esc(e.when)}</div><h3>${esc(e.title)}</h3>
+          ${e.grades&&e.grades.length?`<p class="g">${e.grades.map(esc).join('<br>')}</p>`:''}
+          ${e.text?`<p>${rich(e.text)}</p>`:''}</div>`).join('')}
+      </div>
+    </section>
+  </div>`;
+}
+function viewMissing(){
+  app.innerHTML=`<div class="wrap"><div class="page-head"><h1>Page not found</h1><p>This link doesn't match any page. <a href="#/">Go to the home page</a> or <a href="#/projects">browse projects</a>.</p></div></div>`;
+}
+
+
+/* ---------- router ---------- */
+let scrollHandler=null,raf=null;
+addEventListener('scroll',()=>{if(scrollHandler)scrollHandler()},{passive:true});
+const nav=document.getElementById('mainNav'),menuBtn=document.getElementById('menuBtn');
+menuBtn.addEventListener('click',()=>{const o=nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',o)});
+function route(){
+  const h=location.hash.replace(/^#\/?/,'');
+  const parts=h.split('/').filter(Boolean);
+  scrollHandler=null;if(raf){cancelAnimationFrame(raf);raf=null}
+  nav.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');
+  let key='home';
+  if(!parts.length)viewHome();
+  else if(parts[0]==='projects'&&parts[1]){key='projects';viewProject(parts[1])}
+  else if(parts[0]==='projects'){key='projects';viewProjects()}
+  else if(parts[0]==='experience'){key='experience';viewExperience()}
+  else if(parts[0]==='about'){key='about';viewAbout()}
+  else {key='';viewMissing()}
+  document.querySelectorAll('[data-nav]').forEach(a=>a.dataset.nav===key?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
+  scrollTo(0,0);
+}
+addEventListener('hashchange',route);
+
+
+/* ---------- CV download: plain link to the PDF in dist/ ---------- */
+document.querySelectorAll('[data-cv]').forEach(a=>{if(CV){a.href=CV;a.setAttribute('download','')}else a.remove()});
+
+/* ---------- hero signal ---------- */
+function startSignal(){
+  const c=document.getElementById('signal');if(!c)return;
+  const ctx=c.getContext('2d');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let w,h,t=1.7,px=-1;const T=4,SPEED=110;
+  function size(){const dpr=devicePixelRatio||1;w=c.clientWidth;h=c.clientHeight;c.width=w*dpr;c.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
+  size();
+  const host=c.parentElement;
+  host.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();px=(e.clientY>r.top-40&&e.clientY<r.bottom+40&&e.clientX>=r.left&&e.clientX<=r.right)?e.clientX-r.left:-1;if(reduce)draw()});
+  host.addEventListener('pointerleave',()=>{px=-1;if(reduce)draw()});
+  const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const ease=u=>u<0?0:u>1?1:u*u*(3-2*u);
+  const segs=[[0,.9,'Move to pick'],[.9,1.3,'Grasp'],[1.3,2.4,'Transfer'],[2.4,2.8,'Release'],[2.8,4,'Return home']];
+  function state(time){
+    const q=((time%T)+T)%T;let pos;
+    if(q<.9)pos=ease(q/.9);else if(q<1.3)pos=1;else if(q<2.4)pos=1-2*ease((q-1.3)/1.1);else if(q<2.8)pos=-1;else pos=-1+ease((q-2.8)/1.2);
+    const grip=(q>=1.0&&q<2.5)?1:0;
+    let f=grip?.45:0;
+    f+=.9*Math.exp(-Math.pow((q-1.02)/.05,2))+.35*Math.exp(-Math.pow((q-2.5)/.04,2));
+    f+=.04*Math.sin(time*63)+.03*Math.sin(time*97);
+    return {pos,grip,f,phase:segs.find(s=>q>=s[0]&&q<s[1])[2]};
+  }
+  function draw(){
+    if(!document.body.contains(c))return;
+    if(c.clientWidth!==w)size();
+    ctx.clearRect(0,0,w,h);
+    const rule=css('--rule'),muted=css('--muted'),ink=css('--ink'),bg=css('--bg');
+    const lanes=[['Joint position',.02,.46],['Gripper I/O',.54,.70],['Force sensor',.76,.98]];
+    ctx.lineWidth=1;ctx.strokeStyle=rule;
+    for(let gx=0;gx<w;gx+=48){ctx.beginPath();ctx.moveTo(gx+.5,0);ctx.lineTo(gx+.5,h);ctx.stroke()}
+    lanes.forEach(l=>{ctx.beginPath();ctx.moveTo(0,Math.round(h*l[2])+.5);ctx.lineTo(w,Math.round(h*l[2])+.5);ctx.stroke()});
+    const tx=x=>t-(w-x)/SPEED;
+    const yOf=(i,x)=>{const s=state(tx(x));const [,a,b]=lanes[i];const top=h*a,bot=h*b;
+      const v=i===0?(s.pos+1)/2:i===1?s.grip:Math.min(1,Math.max(0,s.f/1.4));
+      return bot-(bot-top)*(i===0?.08+.84*v:v*.9)};
+    [[0,2.2,ink],[1,1.5,muted],[2,1.3,ink]].forEach(([i,lw,colr])=>{
+      ctx.strokeStyle=colr;ctx.lineWidth=lw;ctx.lineJoin='round';ctx.beginPath();
+      for(let x=0;x<=w;x+=1.5){const y=yOf(i,x);x?ctx.lineTo(x,y):ctx.moveTo(x,y)}
+      ctx.stroke();
+    });
+    ctx.font=`500 12px ${SITE.theme.font}, system-ui, sans-serif`;ctx.fillStyle=muted;
+    lanes.forEach(l=>ctx.fillText(l[0],6,h*l[1]+12));
+    if(px>=0){
+      ctx.strokeStyle=ink;ctx.lineWidth=1;ctx.setLineDash([3,3]);
+      ctx.beginPath();ctx.moveTo(px+.5,0);ctx.lineTo(px+.5,h);ctx.stroke();ctx.setLineDash([]);
+      const label=state(tx(px)).phase;ctx.font=`600 13px ${SITE.theme.font}, system-ui, sans-serif`;
+      const tw=ctx.measureText(label).width+14,lx=Math.min(w-tw-2,px+8);
+      ctx.fillStyle=ink;ctx.beginPath();ctx.roundRect?ctx.roundRect(lx,h*.2,tw,22,5):ctx.rect(lx,h*.2,tw,22);ctx.fill();
+      ctx.fillStyle=bg;ctx.fillText(label,lx+7,h*.2+15);
+    }
+    if(!reduce){t+=1/60;raf=requestAnimationFrame(draw)}
+  }
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{if(reduce)draw()});
+  draw();
+}
+addEventListener('resize',()=>{const c=document.getElementById('signal');if(c&&matchMedia('(prefers-reduced-motion: reduce)').matches)startSignal()});
+
+route();
+})();
+</script>
+</body>
+</html>

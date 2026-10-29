@@ -1,0 +1,428 @@
+# =====================================================================
+#  Luca Boggiani — website content
+#  Edit this file, then run:   python build.py        (builds dist/)
+#                              python build.py --serve (builds + preview)
+#
+#  Tips
+#  - Text is plain text; HTML is escaped. Use **bold** for bold.
+#  - Project icons available: ur, gait, vision, bci, arm, boat, rover
+#  - "featured: true" projects show on the home page (the first one is big).
+#  - Order in this file = order on the site.
+#  - Stats: "auto:projects" / "auto:experience" count items automatically.
+# =====================================================================
+
+site:
+  name: Luca Boggiani
+  initials: LB
+  page_title: Luca Boggiani — Robotics & Automation Engineer
+  description: Luca Boggiani, robotics and automation engineer (MSc, DTU & University of Padova). Industrial robots,
+    machine vision and sensor integration.
+  email: lucaboggiani001@gmail.com
+  linkedin: https://www.linkedin.com/in/luca-boggiani-2001zza/
+  github: https://github.com/243135-tech
+  cv_file: assets/Boggiani_Luca_CV.pdf
+  footer: © 2026 Luca Boggiani, Copenhagen
+theme:
+  font: Archivo
+  light:
+    bg: '#FFFFFF'
+    surface: '#F4F4F4'
+    ink: '#000000'
+    muted: '#5E5E5E'
+    faint: '#8A8A8A'
+    rule: '#DEDEDE'
+  dark:
+    bg: '#000000'
+    surface: '#101010'
+    ink: '#FFFFFF'
+    muted: '#A6A6A6'
+    faint: '#6F6F6F'
+    rule: '#262626'
+home:
+  status: Open to MSc thesis projects from Jan 2027 and graduate roles from summer 2027
+  headline: Robotics and automation engineer
+  intro: I'm Luca, finishing a double MSc at DTU and the University of Padova. I integrate robot arms, cameras and
+    sensors into precise, reliable systems, from lab automation to assistive robotics.
+  show_signal_animation: true
+  stats:
+  - value: auto:projects
+    label: Projects
+  - value: '4'
+    label: Awards and finals
+  - value: auto:experience
+    label: Roles in industry and research
+  - value: '9.8'
+    label: GPA out of 12 at DTU
+projects:
+- slug: ur-precision-optics
+  title: High-precision UR automation for optical experiments
+  kind: Industry
+  icon: ur
+  featured: true
+  summary: Programming a Universal Robots arm to carry out precise tasks in sync with laser systems, cameras and
+    power meters at NIL Technology.
+  abstract: NIL Technology designs and manufactures optical components. On the optical team I control and program
+    a Universal Robots arm that carries out high-precision tasks during advanced optical experiments, coordinated
+    with the lab's lasers, cameras and power meters.
+  tags:
+  - Universal Robots
+  - Motion planning
+  - Instrument integration
+  - Accuracy tuning
+  facts:
+    Where: NIL Technology, Copenhagen
+    When: Aug 2025 – present
+    Role: Student assistant, robotics and automation
+    Team: Optical team
+  sections:
+  - title: The setup
+    paragraphs:
+    - The robot doesn't work alone. Each task involves the arm, a laser system, cameras and power meters, and all
+      of them have to act in the right order and at the right position for a measurement to be valid.
+  - title: What I do
+    bullets:
+    - Program and control the UR arm for the experiment workflows.
+    - Plan the robot's motions for each task.
+    - Tune positioning accuracy so the optical measurements are repeatable.
+    - Coordinate the arm with the other instruments in the setup.
+  - title: What I've learned
+    paragraphs:
+    - Working next to optics engineers taught me how much a small positioning error costs downstream, and how to
+      design robot routines around the tolerance of the measurement rather than the other way round.
+  note: The code is proprietary, so there's no repository for this one.
+- slug: fes-exoskeleton
+  title: Gait-triggered FES and exoskeleton integration in ROS 2
+  kind: Research
+  icon: gait
+  featured: true
+  summary: Porting a real-time functional electrical stimulation system to ROS 2 and coupling it with a lower-limb
+    exoskeleton, with latency and safety validated on the bench.
+  abstract: A bilateral stimulation system detects the phase of each step from IMU data and fires an 8-channel stimulator
+    at the right moment in the gait cycle. My job is to move it from a standalone PyQt6 application into ROS 2 and
+    connect it to a lower-limb exoskeleton, so both devices can work from the same picture of where the user is
+    in their stride.
+  tags:
+  - ROS 2
+  - Python
+  - IMU
+  - Real-time systems
+  - Safety
+  facts:
+    Where: BioRobotics Group, CAR-CSIC, Madrid
+    When: Oct – Dec 2026
+    Role: Visiting research intern
+    Status: In progress
+  sections:
+  - title: The system
+    paragraphs:
+    - The existing setup uses IMUs to detect gait phases on both legs and triggers a Hasomed P24 8-channel stimulator
+      in sync with them. It runs as a PyQt6 desktop app, which works on its own but can't easily share state with
+      other devices.
+  - title: What I'm building
+    bullets:
+    - Rewriting the gait detection and stimulation control as ROS 2 nodes.
+    - Publishing a shared gait-state topic that both the stimulator and the exoskeleton subscribe to, so they can
+      adapt to each other.
+    - Keeping the stimulation timing and safety logic intact through the port.
+  - title: Validation
+    paragraphs:
+    - 'The integrated system has a target of under 15 ms end to end, from sensor reading to stimulation. I''ll measure
+      that on the bench along with the safety mechanisms, before pilot gait trials compare three conditions: exoskeleton
+      only, stimulation only, and both together.'
+  - title: Why it matters for automation
+    paragraphs:
+    - 'This is a sensor-integration problem at heart: several devices, one shared state, hard timing limits and
+      safety interlocks that can''t fail. It''s the same discipline as integrating a robot cell, applied to a person.'
+- slug: object-tracking
+  title: Object recognition and occlusion-aware tracking
+  kind: Course project
+  icon: vision
+  featured: true
+  summary: A perception system for an autonomous vehicle that detects, classifies and keeps tracking several objects
+    even while they're hidden from view.
+  abstract: 'Autonomous systems need to know what''s around them and where it''s going, even when something briefly
+    blocks the view. This project builds that pipeline: detecting and classifying objects in camera images, then
+    tracking many of them at once with Kalman filters that predict each trajectory through occlusions.'
+  tags:
+  - Python
+  - OpenCV
+  - Kalman filter
+  - Multi-object tracking
+  facts:
+    Course: Perception for Autonomous Systems, DTU
+    Language: Python
+    Libraries: OpenCV
+  code: https://github.com/243135-tech/Perception_project
+  sections:
+  - title: Problem
+    paragraphs:
+    - Detection alone is not enough for navigation in a dynamic scene. Objects pass behind each other, and a detector
+      that only reports what it can see right now loses track of them, then treats them as new objects when they
+      reappear.
+  - title: Pipeline
+    bullets:
+    - Image processing and feature extraction on the camera stream.
+    - Object detection and classification.
+    - Data association to match each detection to an existing track.
+    - A Kalman filter per track to estimate position and velocity.
+  - title: Handling occlusion
+    paragraphs:
+    - When an object disappears, its filter keeps predicting where it should be. When a detection shows up near
+      that prediction, the track resumes instead of starting over, so the system keeps a continuous identity for
+      each object.
+  - title: Relevance
+    paragraphs:
+    - The same pieces, detection, classification and state estimation, sit behind vision-guided picking and inline
+      inspection, where parts move on conveyors and are often partly hidden.
+- slug: bci-exoskeleton
+  title: Motor imagery BCI for exoskeleton control
+  kind: Research
+  icon: bci
+  featured: false
+  summary: Real-time EEG decoding that drives a 2-DoF robotic arm and an upper-limb exoskeleton, with a neurofeedback
+    game for training.
+  abstract: 'A two-class motor imagery brain-computer interface: the user imagines moving a limb, the system decodes
+    that intention from EEG in real time and turns it into motion. I built the signal pipeline and classifier, a
+    Unity neurofeedback game for training, and integrated both with an upper-limb exoskeleton for active rehabilitation.'
+  tags:
+  - Python
+  - MATLAB
+  - EEG
+  - Machine learning
+  - Unity
+  facts:
+    Where: NRT-Lab, DTU Electro
+    Type: Special course
+    Recognition: Invited to Brain & Technology Symposium 2025, Hellerup Hospital
+  code: https://github.com/243135-tech/BCI_development
+  sections:
+  - title: Signal pipeline
+    bullets:
+    - EEG acquisition and preprocessing.
+    - Feature extraction and classification with machine learning, in Python and MATLAB.
+    - Real-time decoding of imagined limb movements.
+  - title: From signal to motion
+    paragraphs:
+    - The decoded class drives a 2-DoF robotic arm and, in the full setup, an upper-limb exoskeleton. That closes
+      the loop from a noisy biological sensor to a physical actuator, with the latency and reliability constraints
+      that come with it.
+  - title: Training the user
+    paragraphs:
+    - BCIs work better when users get immediate feedback. I designed a Unity game that reacts to the decoded signal,
+      helping users focus and improve their control over sessions.
+  - title: Outcome
+    paragraphs:
+    - The project earned an invitation to present at the Brain & Technology Symposium 2025 at Hellerup Hospital.
+- slug: cybathlon-2024
+  title: BCI-controlled robotic arm for Cybathlon 2024
+  kind: Competition
+  icon: arm
+  featured: false
+  summary: Led the WHI Students team from Padova to 3rd place in the BCI race and the jury award for most innovative
+    technology.
+  abstract: Cybathlon is an international competition where people with disabilities complete everyday tasks using
+    assistive technology. I led a multidisciplinary student team developing and testing a BCI-controlled robotic
+    arm for the event in Zurich.
+  tags:
+  - Team lead
+  - BCI
+  - Robotic arm
+  - Testing
+  facts:
+    Team: WHI Students, DEI, University of Padova
+    When: Jan – Oct 2024
+    Role: Junior researcher and team lead
+    Result: 3rd place and jury innovation award, Zurich
+  sections:
+  - title: My role
+    bullets:
+    - Led a multidisciplinary team through development and testing.
+    - Planned laboratory tests and analysed the results.
+    - Documented outcomes so the team could iterate on them.
+  - title: Result
+    paragraphs:
+    - The team placed 3rd in the BCI race and received the jury award for the most innovative technology at Cybathlon
+      2024, in October 2024.
+- slug: float-forward
+  title: Embedded control for an electric race boat
+  kind: Student team
+  icon: boat
+  featured: false
+  summary: Electrical team member for Float Forward DTU's entry in the Monaco Energy Boat Challenge.
+  abstract: Float Forward DTU builds an electric boat to compete in the Monaco Energy Boat Challenge. On the electrical
+    team I helped design and integrate the embedded control systems and the cooling system, and tested and debugged
+    components of the electric propulsion.
+  tags:
+  - Embedded systems
+  - Electric propulsion
+  - Cooling
+  - Debugging
+  facts:
+    Team: Float Forward DTU
+    When: Sep 2024 – Jan 2025
+    Role: Electrical team member
+    Event: 12th Monaco Energy Boat Challenge
+  sections:
+  - title: What I worked on
+    bullets:
+    - Design and integration of the embedded control systems.
+    - Integration of the cooling system.
+    - Component testing and debugging for the electric propulsion system.
+- slug: robocup-2025
+  title: Autonomous robot for DTU RoboCup 2025
+  kind: Competition
+  icon: rover
+  featured: false
+  summary: Team software that ran a four-wheeled robot through the competition course on its own, taking us to the
+    final.
+  abstract: DTU RoboCup challenges teams to program a robot to complete an obstacle course without any human input.
+    Our team wrote the programs that drove a four-wheeled robot through the course automatically, and our strategy
+    and its implementation got us to the final.
+  tags:
+  - Autonomous navigation
+  - Robot control
+  - Teamwork
+  facts:
+    Event: DTU RoboCup 2025, Copenhagen
+    When: April 2025
+    Result: Finalist
+  sections:
+  - title: What we built
+    paragraphs:
+    - Software to run the robot through the course autonomously, from reading its sensors to controlling its motion,
+      plus a strategy for which parts of the course to attempt.
+more_work:
+- title: Robotics course project
+  text: Team final project for the DTU robotics course, in MATLAB.
+  link: https://github.com/amirkfir/RoboticsProject
+  side: Code
+- title: Kinematic analysis of a robotic arm in the motion plane
+  text: Bachelor's thesis, University of Padova.
+  side: BSc thesis, 2023
+- title: Passive gait orthosis
+  text: Built a passive orthosis to support the gait cycle and ran biomechanical tests to optimise it, at Moveo
+    in Padova.
+  side: Internship, 2023
+updates:
+- date: Oct 2026
+  title: Starting a research stay at CAR-CSIC Madrid
+  tags: ROS 2, Research
+  project: fes-exoskeleton
+- date: Jan 2026
+  title: 2nd place at the NNE Robotech competition
+  tags: Competition
+- date: Aug 2025
+  title: Joined NIL Technology as a robotics and automation student assistant
+  tags: Industry
+  project: ur-precision-optics
+- date: '2025'
+  title: Invited to the Brain & Technology Symposium at Hellerup Hospital
+  tags: BCI
+  project: bci-exoskeleton
+- date: Apr 2025
+  title: Finalist at DTU RoboCup
+  tags: Competition
+  project: robocup-2025
+- date: Oct 2024
+  title: 3rd place and jury innovation award at Cybathlon, Zurich
+  tags: Competition, BCI
+  project: cybathlon-2024
+- date: Sep 2024
+  title: Joined the Float Forward DTU electrical team
+  tags: Embedded
+  project: float-forward
+- date: Aug 2023
+  title: Started the T.I.M.E. double degree at DTU
+  tags: Education
+experience:
+- when: Oct – Dec 2026 · ongoing
+  title: Visiting Research Intern, BioRobotics Group
+  org: CAR-CSIC, Madrid
+  text: Porting a gait-phase-triggered stimulation system to ROS 2 and integrating it with a lower-limb exoskeleton.
+    Validating latency and safety before pilot trials.
+  highlight: true
+  project: fes-exoskeleton
+- when: Aug 2025 – present
+  title: Student Assistant, Robotics and Automation
+  org: NIL Technology, Copenhagen
+  text: Programming a Universal Robots arm for high-precision tasks coordinated with laser systems, cameras and
+    power meters. Motion planning and accuracy optimisation.
+  project: ur-precision-optics
+- when: Sep 2024 – Jan 2025
+  title: Electrical team member
+  org: Float Forward DTU, Copenhagen
+  text: Embedded control and cooling integration, plus testing and debugging of the electric propulsion system,
+    for the Monaco Energy Boat Challenge.
+  project: float-forward
+- when: Jan – Oct 2024
+  title: Junior Researcher and team lead
+  org: WHI Students team, DEI, University of Padova
+  text: Led a multidisciplinary team building a BCI-controlled robotic arm for Cybathlon 2024. Planned and analysed
+    lab tests.
+  project: cybathlon-2024
+- when: Apr – Jun 2023
+  title: Intern
+  org: Moveo, Padova
+  text: Built a passive orthosis to support the gait cycle and ran biomechanical tests to optimise it.
+awards:
+- title: 2nd place, Robotech competition
+  text: NNE (Novo Nordisk Engineering)
+  when: Jan 2026
+- title: Finalist, DTU RoboCup 2025
+  text: Copenhagen
+  when: Apr 2025
+- title: 3rd place, BCI race, Cybathlon 2024
+  text: Plus the jury award for most innovative technology, Zurich
+  when: Oct 2024
+about:
+  paragraphs:
+  - I'm an Italian engineer finishing a double master's degree between the Technical University of Denmark, where
+    I study Robotics and Autonomous Systems, and the University of Padova, where I study Neuroscience and Rehabilitation.
+    My bachelor's is in Biomedical Engineering.
+  - 'What I enjoy most is integration: getting a robot arm, cameras, lasers and sensors to work together as one
+    dependable system. At NIL Technology I program Universal Robots arms for high-precision tasks, and at DTU and
+    in Padova I''ve built vision pipelines, embedded control systems and real-time sensor-to-actuator loops.'
+  - I'm most interested in automation for production and lab environments, such as material handling, inspection
+    and quality control, where a system has to be precise, repeatable and safe. My biomedical background also makes
+    me comfortable in regulated settings like medtech and life sciences.
+  - Outside work I play semi-professional rugby and captain my team. I've been playing since 2011, and I hike whenever
+    I can.
+  contact_text: Looking for an MSc thesis collaboration from January 2027 and graduate roles in robotics, automation
+    and machine vision from summer 2027.
+  skills:
+    Robotics and control:
+    - Universal Robots programming
+    - Motion planning and accuracy tuning
+    - ROS and ROS 2
+    - Linear, robust and fault-tolerant control
+    - Machinery safety
+    Vision and sensors:
+    - Computer vision with OpenCV
+    - Object detection and Kalman tracking
+    - IMU, EEG and optical instruments
+    - Digital instrumentation
+    - Signal processing
+    Programming:
+    - Python, C and C++
+    - MATLAB
+    - Machine learning
+    - Git
+    - Unity and CAD
+    Languages:
+    - Italian, native
+    - English, fluent
+    - Spanish, fluent
+  education:
+  - when: Aug 2023 – Jun 2027
+    title: MSc Electrical Engineering and Bioengineering, T.I.M.E. double degree
+    grades:
+    - 'Technical University of Denmark: Robotics and Autonomous Systems, GPA 9.8/12'
+    - 'University of Padova: Neuroscience and Rehabilitation, GPA 3.8/4'
+    text: 'Relevant courses: Computer Vision, Robotics, Linear Control Design, Robust and Fault Tolerant Control,
+      Digital Instrumentation, Machine Learning, Signal Processing, Machinery Safety, Robotics and Automation in
+      Pharmaceutical Processes.'
+  - when: Sep 2020 – Jul 2023
+    title: BSc Biomedical Engineering
+    grades:
+    - University of Padova, 109/110
+    text: 'Thesis: Kinematic Analysis of a Robotic Arm in the Motion Plane.'
